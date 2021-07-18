@@ -1,0 +1,31 @@
+.container{
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.content{
+  background-color: var(--gray-100);
+  margin: 1rem auto;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.title{
+  display: flex;
+  border-bottom: 1px solid var(--gray-300);
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.bags{
+  display: flex;
+  justify-content: space-between;
+
+  div{
+    display: flex;
+  }
+}
+
+.pokemon{
+  flex-direction: column;
+  margin: 0.5rem;
+}

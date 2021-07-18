@@ -1,13 +1,16 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { api } from "../services/api";
+import { api } from "../../services/api";
+import styles from "./styles.module.scss";
+
 interface IPokemon {
   name: string;
   base_experience: number;
+  image: string;
 }
 
 interface IBag {
-  sum_experience: number;
+  sum_xp: number;
   pokemon: IPokemon[];
 }
 
@@ -26,16 +29,19 @@ export default function Historic() {
       setTrades(response.data.data);
     });
   }, []);
+  console.log(trades);
+
   return (
     <>
       <Head>
         <title>Histórico de Trocas - PokeBlue</title>
       </Head>
-      <main>
+      <main className={styles.container}>
         <h1>Histórico de trocas</h1>
         {trades.map((trade) => (
-          <div key={trade.ts}>
-            <div style={{ display: "flex" }}>
+          <div key={trade.ts} className={styles.content}>
+            <div className={styles.title}>
+              <p>{trade.data.status}</p>
               <p>
                 Realizada em:{" "}
                 {new Intl.DateTimeFormat("pt-BR", {
@@ -43,25 +49,24 @@ export default function Historic() {
                   timeStyle: "short",
                 }).format(Number(trade.ts) / 1000)}
               </p>
-              <p>{trade.data.status}</p>
             </div>
 
-            <div style={{ display: "flex" }}>
-              <div style={{ border: "1px solid black" }}>
-                <p>{trade.data.bag1.sum_experience}</p>
-                {trade.data.bag1.pokemon.map((pokemon) => (
-                  <div key={pokemon.name}>
+            <div className={styles.bags}>
+              <div>
+                <p>Total XP: {trade.data.bag1.sum_xp}</p>
+                {trade.data.bag1.pokemon.map((pokemon, index) => (
+                  <div key={index} className={styles.pokemon}>
                     <p>{pokemon.name}</p>
-                    <p>{pokemon.base_experience}</p>
+                    <p>{pokemon.image}</p>
                   </div>
                 ))}
               </div>
-              <div style={{ border: "1px solid blue" }}>
-                <p>{trade.data.bag2.sum_experience}</p>
-                {trade.data.bag2.pokemon.map((pokemon) => (
-                  <div key={pokemon.name}>
+              <div>
+                <p>Total XP: {trade.data.bag2.sum_xp}</p>
+                {trade.data.bag2.pokemon.map((pokemon, index) => (
+                  <div key={index} className={styles.pokemon}>
                     <p>{pokemon.name}</p>
-                    <p>{pokemon.base_experience}</p>
+                    <p>{pokemon.image}</p>
                   </div>
                 ))}
               </div>
