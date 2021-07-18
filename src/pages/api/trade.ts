@@ -48,7 +48,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json(trade.data);
 
     case "GET":
-      res.status(200).json({ message: "Podemos listar" });
+      const trades = await fauna.query<Trade>(
+        q.Map(
+          q.Paginate(q.Match(q.Index("all_trades"))),
+          q.Lambda("TRADE", q.Get(q.Var("TRADE")))
+        )
+      );
+      res.status(200).json(trades);
       break;
     default:
       res.setHeader("Allow", ["POST", "GET"]);
