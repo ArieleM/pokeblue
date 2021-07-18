@@ -1,4 +1,19 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { query as q } from "faunadb";
+import { fauna } from "../../services/fauna";
+
+type Bag = {
+  sum_xp: number;
+  pokemon: [{ name: string; base_experience: number }];
+};
+type Trade = {
+  ts: string;
+  data: {
+    status: string;
+    bag1: Bag[];
+    bag2: Bag[];
+  };
+};
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
@@ -6,20 +21,31 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case "POST":
-      const { bag1, bag2 } = req.body;
+      const { bag1, bag2 }: { bag1: Bag; bag2: Bag } = req.body;
 
       const difference = bag1.sum_xp * PERCENTAGE;
 
       const maxDifference = bag1.sum_xp + difference;
       const minDifference = bag1.sum_xp - difference;
 
+      let tradeStatus = "";
+
       if (bag2.sum_xp >= minDifference && bag2.sum_xp <= maxDifference) {
-        return res.status(200).json({ message: "Troca justa!" });
+        tradeStatus = "Troca justa!";
       } else {
-        return res.status(200).json({ message: "Troca injusta!" });
+        tradeStatus = "Troca injusta";
       }
 
-      break;
+      const trade = await fauna.query<Trade>(
+        q.Create(q.Collection("trades"), {
+          data: {
+            bag1,
+            bag2,
+            status: tradeStatus,
+          },
+        })
+      );
+      return res.status(200).json(trade.data);
 
     case "GET":
       res.status(200).json({ message: "Podemos listar" });
