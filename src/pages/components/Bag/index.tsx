@@ -68,6 +68,11 @@ export default function Bag({ allPokemon }: IBagProps) {
         placeholder="Digite o nome do pokemon"
         value={search}
         onChange={(e) => handleSearchPokemon(e.target.value)}
+        onBlur={() => {
+          setTimeout(() => {
+            setFilteredPokemon([]);
+          }, 100);
+        }}
       />
       <div className={styles.filter}>
         {filteredPokemon?.map((pokemon) => (

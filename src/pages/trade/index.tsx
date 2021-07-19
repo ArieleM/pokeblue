@@ -21,9 +21,18 @@ export default function Trade({ allPokemon }: TradeProps) {
       </Head>
       <main className={styles.container}>
         <h1>Temos que trocar!</h1>
-        <div style={{ display: "flex" }}>
+        <div className={styles.bags}>
           <Bag allPokemon={allPokemon} />
-          <button>Troca</button>
+
+          <div onClick={() => alert("ai")}>
+            <img
+              className={styles.image}
+              src="/images/transferpoke.png"
+              alt="Trocar"
+            />
+            <p>Trocar</p>
+          </div>
+
           <Bag allPokemon={allPokemon} />
         </div>
       </main>

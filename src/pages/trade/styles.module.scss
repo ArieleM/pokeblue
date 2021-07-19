@@ -2,5 +2,32 @@
   max-width: 1120px;
   margin: 0 auto;
   padding: 2rem;
+}
 
+.bags{
+  display: flex;
+  align-items: center;
+  button{
+    background-color: none;
+  }
+}
+
+.image{
+  width: 100px;
+  margin: 1rem;
+ 
+
+  @keyframes loading {
+    0%{
+      transform: rotate(0);
+    }
+    100%{
+      transform: rotate(360deg);
+    }
+    
+  }
+}
+
+.image:active{
+  animation: loading 2s linear ;
 }
