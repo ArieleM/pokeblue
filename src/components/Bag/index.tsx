@@ -1,5 +1,5 @@
 import { SetStateAction, useState } from "react";
-import { pokeapi } from "../../../services/api";
+import { pokeapi } from "../../services/api";
 import styles from "./styles.module.scss";
 
 interface IAllPokemon {

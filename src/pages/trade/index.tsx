@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Head from "next/head";
-import { Bag } from "../components/Bag";
+import { Bag } from "../../components/Bag";
 import HomeIcon from "@material-ui/icons/Home";
 import HistoryIcon from "@material-ui/icons/History";
 import { api, pokeapi } from "../../services/api";
