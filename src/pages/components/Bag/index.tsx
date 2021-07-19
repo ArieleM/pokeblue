@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { pokeapi } from "../../../services/api";
 import styles from "./styles.module.scss";
 
@@ -8,6 +8,8 @@ interface IAllPokemon {
 }
 interface IBagProps {
   allPokemon: IAllPokemon[];
+  setBag: React.Dispatch<SetStateAction<IBag>>;
+  bag: IBag;
 }
 interface IBag {
   sum_xp: number;
@@ -20,10 +22,9 @@ interface IPokemon {
   image: string;
 }
 
-export default function Bag({ allPokemon }: IBagProps) {
+export default function Bag({ allPokemon, bag, setBag }: IBagProps) {
   const [search, setSearch] = useState("");
   const [filteredPokemon, setFilteredPokemon] = useState<IAllPokemon[]>([]);
-  const [bag, setBag] = useState<IBag>({ sum_xp: 0, pokemon: [] });
 
   const handleSearchPokemon = (pokemonSearch: string) => {
     let filteredPokemon = [];

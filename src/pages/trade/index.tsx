@@ -2,7 +2,9 @@ import Head from "next/head";
 import styles from "./styles.module.scss";
 import Bag from "../components/Bag";
 import { GetStaticProps } from "next";
-import { pokeapi } from "../../services/api";
+import { api, pokeapi } from "../../services/api";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface IAllPokemon {
   name: string;
@@ -12,8 +14,34 @@ interface IAllPokemon {
 interface TradeProps {
   allPokemon: IAllPokemon[];
 }
+interface IBag {
+  sum_xp: number;
+  pokemon: IPokemon[];
+}
 
+interface IPokemon {
+  name: string;
+  base_experience: number;
+  image: string;
+}
 export default function Trade({ allPokemon }: TradeProps) {
+  const [bag1, setBag1] = useState<IBag>({ sum_xp: 0, pokemon: [] });
+  const [bag2, setBag2] = useState<IBag>({ sum_xp: 0, pokemon: [] });
+
+  const handleTrade = async () => {
+    if (bag1.pokemon.length >= 1 && bag2.pokemon.length >= 1) {
+      const trade = await api.post("/trade", { bag1, bag2 });
+      if (trade.status === 200) {
+        toast.success(trade.data.status);
+        setBag1({ sum_xp: 0, pokemon: [] });
+        setBag2({ sum_xp: 0, pokemon: [] });
+        toast.info("Para mais informações, verifique seu histórico.");
+      }
+    } else {
+      toast.warning("Cada bag deve ter pelo menos 1 pokemon");
+    }
+  };
+
   return (
     <>
       <Head>
@@ -22,9 +50,9 @@ export default function Trade({ allPokemon }: TradeProps) {
       <main className={styles.container}>
         <h1>Temos que trocar!</h1>
         <div className={styles.bags}>
-          <Bag allPokemon={allPokemon} />
+          <Bag allPokemon={allPokemon} bag={bag1} setBag={setBag1} />
 
-          <div onClick={() => alert("ai")}>
+          <div onClick={handleTrade}>
             <img
               className={styles.image}
               src="/images/transferpoke.png"
@@ -33,7 +61,7 @@ export default function Trade({ allPokemon }: TradeProps) {
             <p>Trocar</p>
           </div>
 
-          <Bag allPokemon={allPokemon} />
+          <Bag allPokemon={allPokemon} bag={bag2} setBag={setBag2} />
         </div>
       </main>
     </>
