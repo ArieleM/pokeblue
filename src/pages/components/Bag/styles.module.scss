@@ -12,6 +12,7 @@
   text-align: center;
   background-color: var(--gray-100);
 
+
   input{
     width: 300px;
     margin: 1.5rem auto 0;
@@ -58,6 +59,13 @@
   background-color: var(--gray-300);
 }
 
+.listPokemon{
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: inherit;
+  overflow-y: scroll;
+  max-height: 62vh;
+}
 
 .pokemon{
   border: 1px solid red;
@@ -70,6 +78,8 @@
 
   div{
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
 }
