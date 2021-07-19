@@ -11,6 +11,20 @@ export default function Bag() {
         placeholder="Digite o nome do pokemon"
         value={search}
       />
+      <div className={styles.pokemon}>
+        <p>Charmander</p>
+        <div>
+          <img src="pokemon.image" alt="Imagem" />
+          <p>59</p>
+        </div>
+      </div>
+      <div className={styles.pokemon}>
+        <p>Caterpie</p>
+        <div>
+          <img src="pokemon.image" alt="Imagem" />
+          <p>39</p>
+        </div>
+      </div>
     </div>
   );
 }

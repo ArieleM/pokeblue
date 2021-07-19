@@ -26,3 +26,17 @@
     outline: none;
   }
 }
+.pokemon{
+  border: 1px solid red;
+  width: 32%;
+
+  padding: 1rem;
+  margin: 1rem;
+
+  border-radius: 1rem;
+
+  div{
+    display: flex;
+  }
+
+}
