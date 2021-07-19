@@ -1,0 +1,28 @@
+.container{
+  height: 80vh;
+  width: 45%;
+
+  padding: 1rem;
+
+  margin-top: 1.5rem;
+
+  border: 1px solid black;
+  border-radius: 1.5rem;
+
+  text-align: center;
+  background-color: var(--gray-100);
+
+  input{
+    width: 300px;
+    margin: 1.5rem auto 0;
+    padding: 0.5rem 1.5rem;
+    
+    border-radius: 0.25rem;
+    border: none;
+    
+  }
+
+  input:focus{
+    outline: none;
+  }
+}
