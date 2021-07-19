@@ -10,7 +10,20 @@ interface IBagProps {
 }
 
 export default function Bag({ allPokemon }: IBagProps) {
-  const [search, setSearch] = useState("casa");
+  const [search, setSearch] = useState("");
+  const [filteredPokemon, setFilteredPokemon] = useState<IAllPokemon[]>([]);
+
+  const handleSearchPokemon = (pokemonSearch: string) => {
+    let filteredPokemon = [];
+    if (pokemonSearch.length > 0) {
+      filteredPokemon = allPokemon.filter((pokemon: IAllPokemon) => {
+        return pokemon.name.toUpperCase().includes(pokemonSearch.toUpperCase());
+      });
+    }
+    setFilteredPokemon(filteredPokemon);
+    setSearch(pokemonSearch);
+  };
+
   return (
     <div className={styles.container}>
       <h1>Bag</h1>
@@ -18,7 +31,15 @@ export default function Bag({ allPokemon }: IBagProps) {
         type="search"
         placeholder="Digite o nome do pokemon"
         value={search}
+        onChange={(e) => handleSearchPokemon(e.target.value)}
       />
+      <div className={styles.filter}>
+        {filteredPokemon?.map((pokemon) => (
+          <div className={styles.filterPokemon} key={pokemon.name}>
+            {pokemon.name}
+          </div>
+        ))}
+      </div>
       <div className={styles.pokemon}>
         <p>Charmander</p>
         <div>

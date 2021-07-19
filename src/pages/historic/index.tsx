@@ -29,7 +29,6 @@ export default function Historic() {
       setTrades(response.data.data);
     });
   }, []);
-  console.log(trades);
 
   return (
     <>

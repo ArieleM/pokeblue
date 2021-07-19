@@ -14,8 +14,6 @@ interface TradeProps {
 }
 
 export default function Trade({ allPokemon }: TradeProps) {
-  console.log(allPokemon);
-
   return (
     <>
       <Head>

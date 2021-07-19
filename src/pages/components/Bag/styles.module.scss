@@ -26,6 +26,39 @@
     outline: none;
   }
 }
+.filter::-webkit-scrollbar {
+  width: 5px;
+}
+
+.filter::-webkit-scrollbar-track {
+  background: var(--white);
+}
+
+.filter::-webkit-scrollbar-thumb {
+  background-color:var(--gray-300);    
+  border-radius: 10px; 
+  border: 1px solid var(--gray-700);  
+}
+.filter{
+  max-height: 10vh;
+  overflow-y: scroll;
+  position: absolute;
+  background-color: var(--white);
+  width: 300px;
+  transform: translateX(23.5%);
+}
+
+.filterPokemon{
+  border-left: 1px solid grey;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.filterPokemon:hover{
+  background-color: var(--gray-300);
+}
+
+
 .pokemon{
   border: 1px solid red;
   width: 32%;
