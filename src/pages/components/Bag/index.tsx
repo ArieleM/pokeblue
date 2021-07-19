@@ -1,8 +1,16 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
 
-export default function Bag() {
-  const [search, setSearch] = useState("");
+interface IAllPokemon {
+  name: string;
+  url: string;
+}
+interface IBagProps {
+  allPokemon: IAllPokemon[];
+}
+
+export default function Bag({ allPokemon }: IBagProps) {
+  const [search, setSearch] = useState("casa");
   return (
     <div className={styles.container}>
       <h1>Bag</h1>
