@@ -1,10 +1,11 @@
-import Head from "next/head";
-import styles from "./styles.module.scss";
-import Bag from "../components/Bag";
-import { GetStaticProps } from "next";
-import { api, pokeapi } from "../../services/api";
 import { useState } from "react";
+import { GetStaticProps } from "next";
+import Link from "next/link";
+import Head from "next/head";
+import Bag from "../components/Bag";
+import { api, pokeapi } from "../../services/api";
 import { toast } from "react-toastify";
+import styles from "./styles.module.scss";
 
 interface IAllPokemon {
   name: string;
@@ -48,7 +49,17 @@ export default function Trade({ allPokemon }: TradeProps) {
         <title>Trocas - PokeBlue</title>
       </Head>
       <main className={styles.container}>
-        <h1>Temos que trocar!</h1>
+        <div className={styles.title}>
+          <h1>Temos que trocar!</h1>
+          <div>
+            <Link href="/">
+              <a> voltar</a>
+            </Link>
+            <Link href="/historic">
+              <a> Historico</a>
+            </Link>
+          </div>
+        </div>
         <div className={styles.bags}>
           <Bag allPokemon={allPokemon} bag={bag1} setBag={setBag1} />
 

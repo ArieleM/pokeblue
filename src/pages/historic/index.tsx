@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import styles from "./styles.module.scss";
@@ -36,10 +37,20 @@ export default function Historic() {
         <title>Histórico de Trocas - PokeBlue</title>
       </Head>
       <main className={styles.container}>
-        <h1>Histórico de trocas</h1>
+        <div className={styles.title}>
+          <h1>Histórico de trocas</h1>
+          <div>
+            <Link href="/">
+              <a> Home</a>
+            </Link>
+            <Link href="/trade">
+              <a> Trade</a>
+            </Link>
+          </div>
+        </div>
         {trades.map((trade) => (
           <div key={trade.ts} className={styles.content}>
-            <div className={styles.title}>
+            <div className={styles.titleTrade}>
               <p>{trade.data.status}</p>
               <p>
                 Realizada em:{" "}

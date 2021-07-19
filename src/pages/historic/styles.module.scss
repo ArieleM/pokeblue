@@ -12,6 +12,13 @@
 }
 .title{
   display: flex;
+  justify-content: space-between;
+  a{
+    margin: 0 1rem;
+  }
+}
+.titleTrade{
+  display: flex;
   border-bottom: 1px solid var(--gray-300);
   justify-content: space-between;
   margin-bottom: 1rem;
