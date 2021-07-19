@@ -22,7 +22,7 @@ interface IPokemon {
   image: string;
 }
 
-export default function Bag({ allPokemon, bag, setBag }: IBagProps) {
+export function Bag({ allPokemon, bag, setBag }: IBagProps) {
   const [search, setSearch] = useState("");
   const [filteredPokemon, setFilteredPokemon] = useState<IAllPokemon[]>([]);
 
