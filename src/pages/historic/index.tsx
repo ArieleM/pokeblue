@@ -76,7 +76,7 @@ export default function Historic() {
                 {trade.data.bag1.pokemon.map((pokemon, index) => (
                   <div key={index} className={styles.pokemon}>
                     <p>{pokemon.name}</p>
-                    <img src={pokemon.image} />
+                    <img src={pokemon.image} alt="Imagem do pokemon" />
                   </div>
                 ))}
               </div>
@@ -85,7 +85,7 @@ export default function Historic() {
                 {trade.data.bag2.pokemon.map((pokemon, index) => (
                   <div key={index} className={styles.pokemon}>
                     <p>{pokemon.name}</p>
-                    <img src={pokemon.image} />
+                    <img src={pokemon.image} alt="Imagem do pokemon" />
                   </div>
                 ))}
               </div>
