@@ -63,7 +63,7 @@ export default function Bag({ allPokemon, bag, setBag }: IBagProps) {
 
   return (
     <div className={styles.container}>
-      <h1>Bag</h1>
+      <h1>Bag: {bag.sum_xp}</h1>
       <input
         type="search"
         placeholder="Digite o nome do pokemon"

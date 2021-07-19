@@ -3,6 +3,8 @@ import { GetStaticProps } from "next";
 import Link from "next/link";
 import Head from "next/head";
 import Bag from "../components/Bag";
+import HomeIcon from "@material-ui/icons/Home";
+import HistoryIcon from "@material-ui/icons/History";
 import { api, pokeapi } from "../../services/api";
 import { toast } from "react-toastify";
 import styles from "./styles.module.scss";
@@ -33,10 +35,12 @@ export default function Trade({ allPokemon }: TradeProps) {
     if (bag1.pokemon.length >= 1 && bag2.pokemon.length >= 1) {
       const trade = await api.post("/trade", { bag1, bag2 });
       if (trade.status === 200) {
-        toast.success(trade.data.status);
+        trade.data.status === "Troca Justa"
+          ? toast.success(trade.data.status)
+          : toast.dark(trade.data.status);
         setBag1({ sum_xp: 0, pokemon: [] });
         setBag2({ sum_xp: 0, pokemon: [] });
-        toast.info("Para mais informações, verifique seu histórico.");
+        toast.info("Para mais informações, verifique o histórico.");
       }
     } else {
       toast.warning("Cada bag deve ter pelo menos 1 pokemon");
@@ -53,17 +57,23 @@ export default function Trade({ allPokemon }: TradeProps) {
           <h1>Temos que trocar!</h1>
           <div>
             <Link href="/">
-              <a> voltar</a>
+              <a>
+                {" "}
+                <HomeIcon />
+                <p>Home</p>
+              </a>
             </Link>
             <Link href="/historic">
-              <a> Historico</a>
+              <a>
+                <HistoryIcon /> Historico
+              </a>
             </Link>
           </div>
         </div>
         <div className={styles.bags}>
           <Bag allPokemon={allPokemon} bag={bag1} setBag={setBag1} />
 
-          <div onClick={handleTrade}>
+          <div onClick={handleTrade} className={styles.trade}>
             <img
               className={styles.image}
               src="/images/transferpoke.png"

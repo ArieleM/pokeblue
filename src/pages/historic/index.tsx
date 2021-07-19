@@ -2,6 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
+import HomeIcon from "@material-ui/icons/Home";
+import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import styles from "./styles.module.scss";
 
 interface IPokemon {
@@ -41,10 +43,17 @@ export default function Historic() {
           <h1>Histórico de trocas</h1>
           <div>
             <Link href="/">
-              <a> Home</a>
+              <a>
+                {" "}
+                <HomeIcon />
+                Home
+              </a>
             </Link>
             <Link href="/trade">
-              <a> Trade</a>
+              <a>
+                {" "}
+                <CompareArrowsIcon /> Trade
+              </a>
             </Link>
           </div>
         </div>
@@ -62,21 +71,21 @@ export default function Historic() {
             </div>
 
             <div className={styles.bags}>
-              <div>
-                <p>Total XP: {trade.data.bag1.sum_xp}</p>
+              <p>Total XP: {trade.data.bag1.sum_xp}</p>
+              <div className={styles.bag}>
                 {trade.data.bag1.pokemon.map((pokemon, index) => (
                   <div key={index} className={styles.pokemon}>
                     <p>{pokemon.name}</p>
-                    <p>{pokemon.image}</p>
+                    <img src={pokemon.image} />
                   </div>
                 ))}
               </div>
-              <div>
-                <p>Total XP: {trade.data.bag2.sum_xp}</p>
+              <p>Total XP: {trade.data.bag2.sum_xp}</p>
+              <div className={styles.bag}>
                 {trade.data.bag2.pokemon.map((pokemon, index) => (
                   <div key={index} className={styles.pokemon}>
                     <p>{pokemon.name}</p>
-                    <p>{pokemon.image}</p>
+                    <img src={pokemon.image} />
                   </div>
                 ))}
               </div>
